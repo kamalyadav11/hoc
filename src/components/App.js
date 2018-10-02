@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 import "../App.css";
+import CommentBox from "./CommentBox";
+import CommentList from "./CommentList";
 
 class App extends Component {
   render() {
-    return <div className="App">Hello</div>;
+    return (
+      <div className="App">
+        <CommentBox />
+        <CommentList />
+      </div>
+    );
   }
 }
 
