@@ -13,9 +13,9 @@ import CommentList from "./components/CommentList";
 import CommentBox from "./components/CommentBox";
 import Header from "./components/Header";
 
-const store = createStore(reducers, applyMiddleware(promise));
+const store = applyMiddleware(promise)(createStore);
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={store(reducers)}>
     <BrowserRouter>
       <div>
         <Header />

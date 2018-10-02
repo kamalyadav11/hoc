@@ -15,11 +15,10 @@ const RequireAuth = ChildComponent => {
     isUserAutherised = () => {
       if (!this.props.auth) {
         this.props.history.push("/");
-        alert("you need to be Signed in to see post a comment");
       }
     };
     render() {
-      return <ChildComponent />;
+      return <ChildComponent {...this.props} />;
     }
   }
 
