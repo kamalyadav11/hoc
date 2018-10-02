@@ -11,16 +11,19 @@ import reducers from "./reducers";
 import registerServiceWorker from "./registerServiceWorker";
 import CommentList from "./components/CommentList";
 import CommentBox from "./components/CommentBox";
+import Header from "./components/Header";
 
 const store = createStore(reducers, applyMiddleware(promise));
-
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <Switch>
-        <Route path="/" component={CommentList} />
-        <Route path="/post" component={CommentBox} />
-      </Switch>
+      <div>
+        <Header />
+        <Switch>
+          <Route path="/" component={CommentList} exact />
+          <Route path="/post" component={CommentBox} />
+        </Switch>
+      </div>
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")
