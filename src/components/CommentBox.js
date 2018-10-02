@@ -7,6 +7,22 @@ class CommentBox extends Component {
     comment: ""
   };
 
+  componentDidMount() {
+    this.isUserAutherised();
+  }
+
+  //@@ componentDidMount is used because when the user in on /post page and lookinh through comments, and presses signOut then it is the case of component Update
+  componentDidUpdate() {
+    this.isUserAutherised();
+  }
+
+  isUserAutherised = () => {
+    if (!this.props.auth) {
+      this.props.history.push("/");
+      alert("you need to be Signed in to see post a comment");
+    }
+  };
+
   onChangeInput = e => {
     this.setState({ comment: e.target.value });
   };
@@ -15,7 +31,6 @@ class CommentBox extends Component {
     e.preventDefault();
 
     this.props.saveComment(this.state.comment);
-    //Add save comment
 
     this.setState({ comment: "" });
     console.log(this.state.comment);
@@ -31,13 +46,15 @@ class CommentBox extends Component {
             <button type="submit">Submit Comment</button>
           </div>
         </form>
-        <button onClick={this.props.fetchComments}>Fetch Comments</button>
+        <button onClick={() => this.props.fetchComments}>Fetch Comments</button>
       </div>
     );
   }
 }
 
+const mapStateToProps = ({ auth }) => ({ auth });
+
 export default connect(
-  null,
+  mapStateToProps,
   { saveComment, fetchComments }
 )(CommentBox);
