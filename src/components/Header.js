@@ -2,12 +2,18 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { changeAuth } from "../actions";
+
 class Header extends React.Component {
   renderButton = () => {
     if (this.props.auth) {
-      return <button>Sign Out</button>;
+      return (
+        <button onClick={() => this.props.changeAuth(false)}>Sign Out</button>
+      );
     } else {
-      return <button>Sign in</button>;
+      return (
+        <button onClick={() => this.props.changeAuth(true)}>Sign in</button>
+      );
     }
   };
 
@@ -28,4 +34,7 @@ class Header extends React.Component {
 
 const mapStateToProps = ({ auth }) => ({ auth });
 
-export default connect(mapStateToProps)(Header);
+export default connect(
+  mapStateToProps,
+  { changeAuth }
+)(Header);
